@@ -1,0 +1,79 @@
+{
+  "type": "record",
+  "name": "Flight",
+  "namespace": "aviation",
+
+  "fields": [
+
+    {
+      "name": "icao24",
+      "type": ["null", "string"],
+      "default": null
+    },
+
+    {
+      "name": "callsign",
+      "type": ["null", "string"],
+      "default": null
+    },
+
+    {
+      "name": "country",
+      "type": ["null", "string"],
+      "default": null
+    },
+
+    {
+      "name": "longitude",
+      "type": ["null", "double"],
+      "default": null
+    },
+
+    {
+      "name": "latitude",
+      "type": ["null", "double"],
+      "default": null
+    },
+
+    {
+      "name": "baro_altitude",
+      "type": ["null", "double"],
+      "default": null
+    },
+
+    {
+      "name": "on_ground",
+      "type": "boolean"
+    },
+
+    {
+      "name": "velocity",
+      "type": ["null", "double"],
+      "default": null
+    },
+
+    {
+      "name": "heading",
+      "type": ["null", "double"],
+      "default": null
+    },
+
+    {
+      "name": "vertical_rate",
+      "type": ["null", "double"],
+      "default": null
+    },
+
+    {
+      "name": "geo_altitude",
+      "type": ["null", "double"],
+      "default": null
+    },
+
+    {
+      "name": "event_time",
+      "type": "string"
+    }
+
+  ]
+}
