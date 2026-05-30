@@ -44,3 +44,9 @@ WITH (
     'value.avro-confluent.url'='http://schema-registry:8081'
 );
 
+
+-- Create iceberg database
+CREATE DATABASE `iceberg_catalog`.`aviation`;
+
+-- Switch to the aviation database
+USE `iceberg_catalog`.`aviation`;
