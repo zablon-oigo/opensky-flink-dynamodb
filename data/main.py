@@ -14,9 +14,9 @@ OPENSKY_URL = "https://opensky-network.org/api/states/all"
 
 TOPIC = "raw_flights"
 
-BOOTSTRAP = "localhost:29092"
+BOOTSTRAP = "kafka:9092"
 
-SCHEMA_REGISTRY_URL = "http://localhost:8081"
+SCHEMA_REGISTRY_URL = "http://schema-registry:8081"
 
 
 PARAMS = {
