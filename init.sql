@@ -103,3 +103,5 @@ SHOW DATABASES;
 -- Count records in source table
 SELECT COUNT(*) FROM flights_iceberg;
 
+-- Display table schema and metadata
+DESCRIBE EXTENDED flights_iceberg;
