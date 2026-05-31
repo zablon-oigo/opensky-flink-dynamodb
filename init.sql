@@ -80,3 +80,14 @@ WITH (
 
 -- Enable checkpointing
 SET 'execution.checkpointing.interval' = '10s';
+
+
+-- Continuous streaming insert
+
+INSERT INTO flights_iceberg
+SELECT
+    icao24, callsign, country, longitude, latitude,
+    baro_altitude, on_ground, velocity, heading,
+    vertical_rate, geo_altitude,
+    event_ts   -- No need for CAST anymore
+FROM default_catalog.default_database.raw_flights;
