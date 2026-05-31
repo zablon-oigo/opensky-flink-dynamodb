@@ -78,3 +78,5 @@ WITH (
     'partitioning' = 'days(event_ts)'
 );
 
+-- Enable checkpointing
+SET 'execution.checkpointing.interval' = '10s';
