@@ -50,3 +50,31 @@ CREATE DATABASE `iceberg_catalog`.`aviation`;
 
 -- Switch to the aviation database
 USE `iceberg_catalog`.`aviation`;
+
+
+-- Store flight records in Iceberg format
+
+CREATE TABLE flights_iceberg (
+
+    icao24 STRING,
+    callsign STRING,
+    country STRING,
+
+    longitude DOUBLE,
+    latitude DOUBLE,
+
+    baro_altitude DOUBLE,
+    on_ground BOOLEAN,
+    velocity DOUBLE,
+    heading DOUBLE,
+    vertical_rate DOUBLE,
+    geo_altitude DOUBLE,
+
+    event_ts TIMESTAMP_LTZ(3)
+
+)
+WITH (
+    'write.format.default' = 'parquet',
+    'partitioning' = 'days(event_ts)'
+);
+
