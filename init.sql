@@ -91,3 +91,15 @@ SELECT
     vertical_rate, geo_altitude,
     event_ts   -- No need for CAST anymore
 FROM default_catalog.default_database.raw_flights;
+
+
+-- Show current database
+SHOW CURRENT DATABASE;
+
+-- List all available databases
+SHOW DATABASES;
+
+
+-- Count records in source table
+SELECT COUNT(*) FROM flights_iceberg;
+
