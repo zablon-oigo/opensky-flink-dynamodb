@@ -1,7 +1,7 @@
 ## Processing Millions of Real-Time Events from Thousands of Aircraft with Apache Flink
 
 
-![workflow](https://github.com/zablon-oigo/iceberg-nessie-dremio-spark-lakehouse/actions/workflows/ci.yaml/badge.svg)
+![workflow](https://github.com/zablon-oigo/opensky-flink-trino-pipeline/actions/workflows/ci.yaml/badge.svg)
 ![Apache Flink](https://img.shields.io/badge/Apache%20Flink-Stream%20Processing-E6526F?logo=apacheflink&logoColor=white)
 ![Apache Kafka](https://img.shields.io/badge/Apache%20Kafka-Distributed%20Streaming-000000?logo=apachekafka&logoColor=white)
 ![Schema Registry](https://img.shields.io/badge/Schema%20Registry-Avro%20Contracts-FF6B35)
