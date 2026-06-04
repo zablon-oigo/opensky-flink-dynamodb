@@ -1,6 +1,20 @@
 ## Processing Millions of Real-Time Events from Thousands of Aircraft with Apache Flink
 
 
+![workflow](https://github.com/zablon-oigo/iceberg-nessie-dremio-spark-lakehouse/actions/workflows/ci.yaml/badge.svg)
+![Apache Flink](https://img.shields.io/badge/Apache%20Flink-Stream%20Processing-E6526F?logo=apacheflink&logoColor=white)
+![Apache Kafka](https://img.shields.io/badge/Apache%20Kafka-Distributed%20Streaming-000000?logo=apachekafka&logoColor=white)
+![Schema Registry](https://img.shields.io/badge/Schema%20Registry-Avro%20Contracts-FF6B35)
+![Apache Iceberg](https://img.shields.io/badge/Apache%20Iceberg-Lakehouse-3C8DBC?logo=apache&logoColor=white)
+![Iceberg REST Catalog](https://img.shields.io/badge/Iceberg%20REST%20Catalog-Metadata%20Service-4B5563)
+![MinIO](https://img.shields.io/badge/MinIO-S3%20Storage-C72E49?logo=minio&logoColor=white)
+![Trino](https://img.shields.io/badge/Trino-SQL%20Query%20Engine-DD00A1?logo=trino&logoColor=white)
+![Apache Superset](https://img.shields.io/badge/Apache%20Superset-BI%20Analytics-20A6C9?logo=apache&logoColor=white)
+![OpenSky Network](https://img.shields.io/badge/OpenSky%20Network-Live%20Aircraft%20Data-4285F4)
+![Docker](https://img.shields.io/badge/Docker-Containerization-2496ED?logo=docker&logoColor=white)
+
+
+
 This project demonstrates how to process millions of real-time aircraft events using Apache Flink.
 
 The pipeline ingests live aircraft telemetry data from the OpenSky Network and streams it into Apache Kafka. A Schema Registry enforces data contracts using Avro schemas, ensuring consistent, reliable, and backward-compatible data exchange across the platform.
@@ -15,26 +29,79 @@ By incrementally processing only new events and avoiding repeated full-table sca
 
 <img width="1396" height="417" alt="flink" src="https://github.com/user-attachments/assets/7bea51fd-0174-429f-b155-8c5f1e0f2762" />
 
+
+
+#### Start the Environment
+
+
+Build the containers:
+
+```sh
+docker compose build --no-cache
+```
+Start all services:
+
+```sh
+docker compose up -d
+```
+
+Verify all services are running:
+
+```sh
+docker ps
+```
+> Ensure all services are running successfully before proceeding
+
+### Flink SQL
+
+Access the Flink SQL Client:
+
+```sh
+docker compose exec -it jobmanager ./bin/sql-client.sh
+```
+> Paste SQL codes in init.sql file
+
+Enable streaming mode:
+
 ```sh
 SET execution.runtime-mode = streaming;
 ```
-
-In batch mode, you can retrieve the complete dataset as of the latest snapshot:
+Verify data ingestion:
 ```sh
-SET execution.runtime-mode = batch;
+SELECT * FROM flights_iceberg;
 ```
 
+#### Querying Data with Trino
+
+Connect to the Trino coordinator:
 
 ```sh
-SET execution.runtime-mode = streaming;
+docker compose exec -it trino-coordinator bash
 ```
-```sh
-SET table.dynamic-table-options.enabled=true;
-```
+Start the CLI:
 
 ```sh
-trino://admin@trino-coordinator:8080/iceberg/aviation
+trino
 ```
+Show Available Catalogs
+
+```sh
+SHOW CATALOGS;
+```
+Show Schemas
+
+```sh
+SHOW SCHEMAS FROM iceberg;
+```
+Query Aircraft Data
+
+```sh
+SELECT * 
+FROM iceberg.aviation.flights_iceberg 
+LIMIT 1;
+```
+
+Create a Flight Statistics View
 
 ```sh
 CREATE OR REPLACE VIEW flights_stats AS
@@ -52,4 +119,18 @@ SELECT
     MIN(event_ts) AS period_start,
     MAX(event_ts) AS period_end
 FROM flights_iceberg;
+```
+
+View results:
+
+```sh
+SELECT * FROM flights_stats;
+```
+
+#### Connecting Superset to Trino
+
+Use the following SQLAlchemy connection string:
+
+```sh
+trino://admin@trino-coordinator:8080/iceberg/aviation
 ```
