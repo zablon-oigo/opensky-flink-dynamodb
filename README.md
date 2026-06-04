@@ -13,6 +13,7 @@ By incrementally processing only new events and avoiding repeated full-table sca
 
 #### Architecture Diagram
 
+<img width="1396" height="417" alt="flink" src="https://github.com/user-attachments/assets/7bea51fd-0174-429f-b155-8c5f1e0f2762" />
 
 ```sh
 SET execution.runtime-mode = streaming;
